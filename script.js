@@ -270,6 +270,7 @@ function initBirthdayBalloons() {
 
   const colors = ["#ffb2ba", "#ffd578", "#70a2df", "#3556d3", "#78c8b8", "#f34d12"];
   let burstIndex = 0;
+  let clicksSinceMeat = 0;
 
   function makeBalloon(x, y, index) {
     const balloon = document.createElement("span");
@@ -303,6 +304,47 @@ function initBirthdayBalloons() {
     animation.finished.then(() => balloon.remove()).catch(() => balloon.remove());
   }
 
+  function makeMeat(x, y, index) {
+    const meat = document.createElement("img");
+    const angle = (Math.PI * 2 * index) / 12 + Math.random() * 0.72;
+    const distance = 84 + Math.random() * 150;
+    const drift = Math.cos(angle) * distance;
+    const lift = Math.sin(angle) * distance * 0.38 - Math.min(window.innerHeight * 0.32, 260);
+    const size = 34 + Math.random() * 34;
+    const rotate = -28 + Math.random() * 56;
+
+    meat.className = "released-meat";
+    meat.src = "assets/title-meat-motif.png";
+    meat.alt = "";
+    meat.decoding = "async";
+    meat.style.setProperty("--release-x", `${x}px`);
+    meat.style.setProperty("--release-y", `${y}px`);
+    meat.style.setProperty("--release-size", `${size}px`);
+    releaseLayer.append(meat);
+
+    const animation = meat.animate(
+      [
+        { opacity: 0, transform: "translate3d(-50%, 10px, 0) scale(0.72) rotate(0deg)" },
+        { opacity: 1, transform: `translate3d(calc(-50% + ${drift * 0.14}px), -24px, 0) scale(1) rotate(${rotate * 0.22}deg)`, offset: 0.1 },
+        { opacity: 1, transform: `translate3d(calc(-50% + ${drift * 0.78}px), ${lift * 0.82}px, 0) scale(0.96) rotate(${-rotate}deg)`, offset: 0.72 },
+        { opacity: 0, transform: `translate3d(calc(-50% + ${drift}px), ${lift}px, 0) scale(0.8) rotate(${rotate * 1.35}deg)` },
+      ],
+      {
+        duration: 2100 + index * 70,
+        easing: "cubic-bezier(0.18, 0.78, 0.28, 1)",
+        fill: "forwards",
+      },
+    );
+
+    animation.finished.then(() => meat.remove()).catch(() => meat.remove());
+  }
+
+  function makeMeatBurst(x, y) {
+    for (let index = 0; index < 12; index += 1) {
+      makeMeat(x + (Math.random() - 0.5) * 26, y + (Math.random() - 0.5) * 18, index);
+    }
+  }
+
   document.querySelector(".hero")?.addEventListener("pointerdown", (event) => {
     const rect = releaseLayer.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -310,6 +352,13 @@ function initBirthdayBalloons() {
 
     for (let index = 0; index < 4; index += 1) {
       makeBalloon(x + (index - 1.5) * 10, y + Math.random() * 16, index);
+    }
+
+    clicksSinceMeat += 1;
+    const meatBurstChance = clamp(0.04 + clicksSinceMeat * 0.04, 0.08, 0.38);
+    if (Math.random() < meatBurstChance) {
+      makeMeatBurst(x, y);
+      clicksSinceMeat = 0;
     }
 
     burstIndex += 1;
