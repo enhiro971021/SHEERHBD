@@ -12,7 +12,13 @@ https://enhiro971021.github.io/SHEERHBD/
 - `styles.css` - レイアウト、レスポンシブ、ビジュアルスタイル
 - `script.js` - バルーンの揺れとクリック時の演出
 - `assets/` - ページで使う画像素材
-- `favicon.svg` - サイトアイコン
+- `favicon.png` - サイトアイコン
+
+## フォント
+
+- ヒーロー見出し: LINE Seed JP ExtraBold
+- 配布元: https://seed.line.me/index_jp.html
+- ライセンス: SIL Open Font License 1.1（`assets/fonts/LINESeedJP-OFL.txt`）
 
 ## ローカル確認
 
