@@ -1,0 +1,11 @@
+.DS_Store
+.playwright-cli/
+output/
+node_modules/
+assets/meat-poetry-table.png
+assets/motif-cake-wine.png
+assets/motif-crow.png
+assets/motif-meat.png
+assets/motif-panda.png
+assets/motif-people.png
+tools_transparent_motifs.py
