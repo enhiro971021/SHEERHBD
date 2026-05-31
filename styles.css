@@ -55,6 +55,8 @@ a {
   border: 2px solid var(--ink);
   background: var(--cream-soft);
   padding: clamp(24px, 4vw, 54px) clamp(18px, 5vw, 64px) clamp(28px, 5vw, 64px);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hero__brand {
