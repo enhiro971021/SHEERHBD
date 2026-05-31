@@ -35,7 +35,6 @@ function initSheerMotion() {
     const ring = document.createElementNS(SVG_NS, "circle");
     path.classList.add("tether__line");
     ring.classList.add("tether__ring");
-    ring.setAttribute("r", "6");
     tetherLayer.append(path, ring);
 
     return {
@@ -49,6 +48,7 @@ function initSheerMotion() {
       restY: 0,
       anchorX: 0,
       anchorY: 0,
+      ringRadius: 5.6,
       length: 170,
       swingRadius: 120,
       angle: profile.restAngle + (index - 2) * 0.006,
@@ -95,12 +95,17 @@ function initSheerMotion() {
     tetherLayer.setAttribute("viewBox", `0 0 ${heroMark.offsetWidth} ${markHeight}`);
 
     states.forEach((state) => {
-      const stemX = getComputedStyle(state.balloon).getPropertyValue("--stem-x").trim();
+      const balloonStyle = getComputedStyle(state.balloon);
+      const stemX = balloonStyle.getPropertyValue("--stem-x").trim();
+      const stemY = balloonStyle.getPropertyValue("--stem-y").trim();
       const stemRatio = stemX.endsWith("%") ? Number.parseFloat(stemX) / 100 : 0.5;
+      const stemYRatio = stemY.endsWith("%") ? Number.parseFloat(stemY) / 100 : 0.77;
       state.baseLeft = sheerWord.offsetLeft + state.balloon.offsetLeft;
       state.width = state.balloon.offsetWidth;
       state.restX = state.baseLeft + state.width * stemRatio;
-      state.restY = sheerWord.offsetTop + state.balloon.offsetTop + state.balloon.offsetHeight * 0.77;
+      state.restY = sheerWord.offsetTop + state.balloon.offsetTop + state.balloon.offsetHeight * stemYRatio;
+      state.ringRadius = heroMark.offsetWidth < 560 ? 4.1 : 5.6;
+      state.ring.setAttribute("r", state.ringRadius.toFixed(1));
       state.length = clamp((markHeight - state.restY + 42) * 0.44, markHeight * 0.18, markHeight * 0.34);
       state.swingRadius = clamp(state.length * 0.68 * state.profile.swingScale, markHeight * 0.12, markHeight * 0.28);
       state.anchorX = state.restX;

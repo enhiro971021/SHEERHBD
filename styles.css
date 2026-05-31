@@ -10,8 +10,16 @@
   --mint: #78c8b8;
   --line: rgba(52, 47, 51, 0.22);
   --max: 1240px;
-  --title-font: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+  --title-font: "LINE Seed JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
     "Yu Gothic", "YuGothic", sans-serif;
+}
+
+@font-face {
+  font-family: "LINE Seed JP";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("assets/fonts/LINESeedJP_OTF_Eb.woff2") format("woff2");
 }
 
 * {
@@ -249,7 +257,7 @@ a {
 }
 
 .participant-motif--panda {
-  --motif-height: clamp(28px, 2.7vw, 40px);
+  --motif-height: clamp(17px, 1.7vw, 25px);
   --motif-rotate: -1deg;
 }
 
@@ -275,9 +283,10 @@ a {
 .balloon {
   --letter-scale: 0.96;
   --stem-x: 50%;
+  --stem-y: 77%;
   position: relative;
   display: inline-block;
-  transform-origin: var(--stem-x) 78%;
+  transform-origin: var(--stem-x) var(--stem-y);
   transform: translate3d(0, 0, 0) rotate(0deg);
   will-change: transform;
 }
@@ -304,7 +313,8 @@ a {
 }
 
 .balloon--h {
-  --stem-x: 54%;
+  --stem-x: 70%;
+  --stem-y: 76%;
 }
 
 .balloon--e {
@@ -449,13 +459,11 @@ h1 {
   margin: 0 0 20px;
   color: var(--ink);
   font-family: var(--title-font);
-  font-size: clamp(4.25rem, 8.5vw, 8rem);
-  font-weight: 900;
+  font-size: clamp(4.05rem, 8.2vw, 7.8rem);
+  font-weight: 800;
   letter-spacing: 0;
-  line-height: 0.88;
-  text-shadow:
-    0 2px 0 var(--cream-soft),
-    0 10px 24px rgba(52, 47, 51, 0.1);
+  line-height: 0.9;
+  text-shadow: 0 10px 22px rgba(52, 47, 51, 0.08);
   text-wrap: balance;
 }
 
@@ -463,48 +471,43 @@ h1 span {
   position: relative;
   display: block;
   width: fit-content;
-  padding: 0 0.02em 0.09em;
+  padding: 0 0.05em 0.1em 0;
   white-space: nowrap;
 }
 
 h1 span::after {
   position: absolute;
-  right: 0.01em;
-  bottom: 0.12em;
-  left: 0.01em;
+  right: 0;
+  bottom: 0.07em;
+  left: 0;
   z-index: -1;
-  height: 0.12em;
+  height: 0.18em;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255, 178, 186, 0.82), rgba(255, 213, 120, 0.86));
+  background: linear-gradient(90deg, rgba(255, 178, 186, 0.72), rgba(255, 213, 120, 0.78));
   content: "";
 }
 
 h1 span:nth-child(2)::after {
-  background: linear-gradient(90deg, rgba(120, 200, 184, 0.82), rgba(112, 162, 223, 0.76));
+  background: linear-gradient(90deg, rgba(120, 200, 184, 0.7), rgba(112, 162, 223, 0.68));
 }
 
 h1 em {
   display: inline-block;
   color: var(--coral);
   font-style: normal;
-  text-shadow:
-    0 2px 0 var(--cream-soft),
-    0 10px 24px rgba(52, 47, 51, 0.12);
+  text-shadow: 0 10px 22px rgba(52, 47, 51, 0.09);
 }
 
 h1 span:first-child em {
   color: var(--blue);
-  text-shadow:
-    0 2px 0 var(--cream-soft),
-    0 10px 24px rgba(52, 47, 51, 0.12);
+  text-shadow: 0 10px 22px rgba(52, 47, 51, 0.09);
 }
 
 .event-card {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   border: 2px solid var(--ink);
-  background:
-    linear-gradient(90deg, var(--cream-soft) 0 49.5%, #ffedbd 50% 100%);
+  background: var(--cream-soft);
 }
 
 .event-card__row {
@@ -526,8 +529,7 @@ h1 span:first-child em {
 .event-card__row--contact {
   grid-column: 1 / -1;
   border-bottom: 0;
-  background:
-    linear-gradient(90deg, #e9f7f2 0 49.5%, #f2edc8 50% 100%);
+  background: transparent;
 }
 
 .event-card span {
@@ -648,7 +650,7 @@ h1 span:first-child em {
   }
 
   .participant-motif--panda {
-    --motif-height: 20px;
+    --motif-height: 12px;
   }
 
   .sheer-word {
@@ -668,7 +670,7 @@ h1 span:first-child em {
 
   .tether__line,
   .tether__ring {
-    stroke-width: 2.5;
+    stroke-width: 2.15;
   }
 
   .hero-mark__caption {
