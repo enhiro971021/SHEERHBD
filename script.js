@@ -106,7 +106,7 @@ function initSheerMotion() {
       state.restY = sheerWord.offsetTop + state.balloon.offsetTop + state.balloon.offsetHeight * stemYRatio;
       state.ringRadius = heroMark.offsetWidth < 560 ? 4.1 : 5.6;
       state.ring.setAttribute("r", state.ringRadius.toFixed(1));
-      state.length = clamp((markHeight - state.restY + 42) * 0.44, markHeight * 0.18, markHeight * 0.34);
+      state.length = clamp((markHeight - state.restY + 42) * 0.39, markHeight * 0.16, markHeight * 0.3);
       state.swingRadius = clamp(state.length * 0.68 * state.profile.swingScale, markHeight * 0.12, markHeight * 0.28);
       state.anchorX = state.restX;
       state.anchorY = state.restY + state.length;

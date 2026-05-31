@@ -3,13 +3,20 @@
   --cream: #f8f5ef;
   --cream-soft: #fffdf8;
   --coral: #f34d12;
+  --coral-deep: #df5625;
   --pink: #ffb2ba;
   --yellow: #ffd578;
   --sky: #70a2df;
   --blue: #3556d3;
   --mint: #78c8b8;
+  --shape-coral: #e55724;
+  --shape-yellow: #ffdc8b;
+  --shape-pink: #f4b7bb;
+  --balloon-outline: #25304d;
   --line: rgba(52, 47, 51, 0.22);
   --max: 1240px;
+  --display-font: "Cherry Bomb One", "Rubik Bubbles", "Futura", "Avenir Next",
+    "Helvetica Neue", Arial, sans-serif;
   --title-font: "LINE Seed JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
     "Yu Gothic", "YuGothic", sans-serif;
 }
@@ -296,7 +303,7 @@ a {
 }
 
 .balloon {
-  --letter-scale: 0.96;
+  --letter-scale: 0.98;
   --stem-x: 50%;
   --stem-y: 77%;
   position: relative;
@@ -307,20 +314,25 @@ a {
 }
 
 .sheer-letter {
+  --letter-fill: var(--shape-coral);
   position: relative;
   z-index: 2;
   display: block;
   color: transparent;
   cursor: default;
-  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(8.7rem, 16vw, 18rem);
-  font-weight: 950;
-  line-height: 0.78;
+  font-family: var(--display-font);
+  font-size: clamp(9rem, 16.4vw, 18.25rem);
+  font-weight: 400;
+  line-height: 0.84;
+  letter-spacing: 0;
   transform: scaleX(var(--letter-scale));
   -webkit-background-clip: text;
   background-clip: text;
+  background-image: linear-gradient(var(--letter-fill), var(--letter-fill));
   background-size: 100% 100%;
-  text-shadow: 0 14px 36px rgba(52, 47, 51, 0.04);
+  -webkit-text-stroke: clamp(2px, 0.3vw, 4px) var(--balloon-outline);
+  filter: drop-shadow(0 14px 20px rgba(52, 47, 51, 0.1));
+  text-shadow: none;
 }
 
 .balloon--s {
@@ -345,29 +357,29 @@ a {
 }
 
 .sheer-letter--s {
-  background-image: linear-gradient(135deg, var(--pink) 0 35%, var(--mint) 36% 61%, var(--coral) 62% 100%);
+  --letter-fill: var(--shape-coral);
 }
 
 .sheer-letter--h {
-  background-image: linear-gradient(90deg, var(--yellow) 0 34%, var(--pink) 35% 62%, var(--sky) 63% 100%);
+  --letter-fill: var(--shape-yellow);
 }
 
 .sheer-letter--e {
-  background-image: linear-gradient(90deg, var(--mint) 0 36%, var(--coral) 37% 100%);
+  --letter-fill: var(--blue);
 }
 
 .sheer-letter--e-alt {
-  background-image: linear-gradient(90deg, var(--sky) 0 34%, var(--coral) 35% 60%, var(--pink) 61% 100%);
+  --letter-fill: var(--mint);
 }
 
 .sheer-letter--r {
-  background-image: linear-gradient(90deg, var(--blue) 0 35%, var(--yellow) 36% 63%, var(--coral) 64% 100%);
+  --letter-fill: var(--coral-deep);
 }
 
 .tether-layer {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
@@ -379,14 +391,13 @@ a {
   fill: none;
   stroke: var(--ink);
   stroke-linecap: round;
-  stroke-width: 3.2;
+  stroke-width: 2.8;
   vector-effect: non-scaling-stroke;
 }
 
 .tether__ring {
-  fill: var(--cream-soft);
-  stroke: var(--ink);
-  stroke-width: 3.2;
+  fill: none;
+  stroke: none;
   vector-effect: non-scaling-stroke;
 }
 
@@ -669,10 +680,10 @@ h1 span:first-child em {
   }
 
   .sheer-word {
-    left: 3%;
-    right: 3%;
+    left: 1.5%;
+    right: 1.5%;
     top: 18%;
-    gap: 1px;
+    gap: 0;
   }
 
   .balloon {
@@ -680,7 +691,7 @@ h1 span:first-child em {
   }
 
   .sheer-letter {
-    font-size: clamp(3.75rem, 17.4vw, 4.75rem);
+    font-size: clamp(4.45rem, 20.2vw, 5.55rem);
   }
 
   .tether__line,
@@ -734,7 +745,7 @@ h1 span:first-child em {
 
 @media (max-width: 360px) {
   .sheer-letter {
-    font-size: 3.72rem;
+    font-size: 4.34rem;
   }
 
   h1 {
